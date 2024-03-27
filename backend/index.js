@@ -16,7 +16,7 @@ app.get('/',(request,response)=>{
 app.post('/books', async (request, response)=>{
     try{
             
-        if(  !request.body.title || !request.body.author || request.body.publishYear)
+        if(  !request.body.title || !request.body.author || !request.body.publishYear)
             {
                 return response.status(400).send({
                     message:'All fields are required',
@@ -70,6 +70,25 @@ app.get('/books/:id', async (request, response)=>{
     }
 });
 
+//update a book
+app.put('/books/:id', async (request, response)=>{
+    try{
+        if(  !request.body.title || !request.body.author || !request.body.publishYear)
+            {
+                return response.status(400).send({
+                    message:'All fields are required',
+                })
+            }
+
+        const {id} = request.params;
+        const result = await Book.findByIdAndUpdate(id, request.body)
+
+
+    }catch(error){
+        console.log(error)
+        response.status(500).send({message: error.message})
+    }
+})
 
 mongoose.connect(mongoDBURL).then(()=>{
 console.log("Database connected");
