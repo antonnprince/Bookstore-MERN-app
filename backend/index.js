@@ -5,6 +5,7 @@ import { Book } from "./models/bookModel.js";
 
 const app = express();
 
+app.use(express.json())
 //sets up the route handler for root URL
 //when GET req made, callback function will be executed
 app.get('/',(request,response)=>{
