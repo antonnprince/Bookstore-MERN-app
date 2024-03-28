@@ -2,7 +2,7 @@ import express from "express";
 import { Book } from "./models/bookModel";
 const router = express.router();
 
-router.post('/books', async (request, response)=>{
+router.post('/', async (request, response)=>{
     try{
         if (!request.body.title.trim() || !request.body.author.trim() || !request.body.publishYear) {
             return response.status(400).send({
@@ -26,7 +26,7 @@ router.post('/books', async (request, response)=>{
         }
 });
 
-router.get('/books', async (request, response)=>{
+router.get('/', async (request, response)=>{
     try{
         const books = await Book.find({}); //get all books
 
@@ -43,7 +43,7 @@ router.get('/books', async (request, response)=>{
 });
 
 //get one book using id
-router.get('/books/:id', async (request, response)=>{
+router.get('/:id', async (request, response)=>{
     try{
         const {id} = request.params;
 
@@ -59,7 +59,7 @@ router.get('/books/:id', async (request, response)=>{
 });
 
 //update a book
-router.put('/books/:id', async (request, response)=>{
+router.put('/:id', async (request, response)=>{
     try{
         if(  !request.body.title || !request.body.author || !request.body.publishYear)
             {
@@ -84,7 +84,7 @@ router.put('/books/:id', async (request, response)=>{
 })
 
 //delete book
-router.delete('/books/:id', async (request, response)=>{
+router.delete('/:id', async (request, response)=>{
     try{
         const {id} = request.params;
 
