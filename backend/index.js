@@ -1,8 +1,7 @@
 import express, { request, response } from "express"
 import {PORT, mongoDBURL} from "./config.js";
 import mongoose from 'mongoose'
-import { Book } from "./models/bookModel.js";
-import booksRoute from './routes/booksRoutes.js'
+import booksRoutes from './routes/booksRoutes.js'
 import cors from 'cors';
 
 const app = express();
@@ -11,7 +10,7 @@ app.use(express.json()) //to use json format data
 //sets up the route handler for root URL
 //when GET req made, callback function will be executed
 
-app.use(cors())
+ app.use(cors())
 
 // app.use(
 //     cors({
@@ -28,7 +27,7 @@ app.get('/',(request,response)=>{
 });
 
 
-app.use('/books',booksRoute)
+app.use('/books',booksRoutes)
 
 mongoose.connect(mongoDBURL).then(()=>{
 console.log("Database connected");

@@ -1,6 +1,6 @@
 import express from "express";
-import { Book } from "./models/bookModel";
-const router = express.router();
+import {Book} from "../models/bookModel.js" 
+const router = express.Router();
 
 router.post('/', async (request, response)=>{
     try{
