@@ -7,6 +7,7 @@ import cors from 'cors';
 const app = express();
 
 app.use(express.json()) //to use json format data
+
 //sets up the route handler for root URL
 //when GET req made, callback function will be executed
 
