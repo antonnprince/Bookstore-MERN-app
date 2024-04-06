@@ -13,12 +13,13 @@ const Home = () => {
 
   useEffect(()=>{
     setLoading(true);
-    axios.get('https://localhost:5555/books').then((response)=>{
-      setBooks(response.data.data)
+    axios.get('http://localhost:5555/books/').then((response)=>{
+      setBooks(response.data)
       setLoading(false)
     }).catch((error)=>{
       console.log(error)
       setLoading(false)
+      console.log("Books:", books)
     })
   },[])
 
@@ -36,7 +37,7 @@ const Home = () => {
             <Spinner/>
           ) : (
             <table className='w-full border-separate border-spacing-2'>
-
+            
                 <thead>
                     <tr>
                       <th className='border border-slate-600 rounded-md'> No </th>
@@ -50,6 +51,7 @@ const Home = () => {
                 <tbody>
                   {
                     books.map((book,index)=>(
+                      
                       <tr key={book._id} className='h-8'>
                         <td className='border border-slate-700 rounded-md text-center'>
                           {index + 1}
