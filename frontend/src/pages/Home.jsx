@@ -9,17 +9,17 @@ import {MdOutlineAddBox, MdOutlineDelete} from 'react-icons/md'
 
 const Home = () => {
   const[books,setBooks] = useState([]);
-  const [loading,setLoading] = useState(false);
+  const [loading,setLoading] = useState(true);
 
   useEffect(()=>{
-    setLoading(true);
     axios.get('http://localhost:5555/books/').then((response)=>{
-      setBooks(response.data)
+      console.log(response.data)
+      setBooks(response.data["data"])
       setLoading(false)
     }).catch((error)=>{
       console.log(error)
       setLoading(false)
-      console.log("Books:", books)
+      console.log(books)
     })
   },[])
 
@@ -37,7 +37,7 @@ const Home = () => {
             <Spinner/>
           ) : (
             <table className='w-full border-separate border-spacing-2'>
-            
+           
                 <thead>
                     <tr>
                       <th className='border border-slate-600 rounded-md'> No </th>
@@ -50,9 +50,8 @@ const Home = () => {
 
                 <tbody>
                   {
-                    books.map((book,index)=>(
-                      
-                      <tr key={book._id} className='h-8'>
+                    books.map((book,index)=>{return(
+                      <tr key={index} className='h-8'>
                         <td className='border border-slate-700 rounded-md text-center'>
                           {index + 1}
                         </td>
@@ -85,7 +84,7 @@ const Home = () => {
                           </div>
                         </td>
                       </tr>
-                    ))
+                    )})
                   }
                 </tbody>
             </table>
